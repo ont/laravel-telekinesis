@@ -101,6 +101,8 @@
 
 
 /* -------------------------- */
-T('\\App\\Vacancy').where('test', '<', 5).get(function(data){
+T('\\App\\Resume').whereHas('vacancies', function(q){
+    q.where('test', '>', 0);
+}).get(function(data){
     console.log("data>>>", data);
 });
