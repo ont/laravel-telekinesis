@@ -1,4 +1,4 @@
-<?php namespace Ont\\Telekinesis;
+<?php namespace Ont\Telekinesis;
 
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
@@ -33,9 +33,14 @@ class ServiceProvider extends LaravelServiceProvider {
      */
     public function register() {
 
-        // Bind any implementations.
+        // Bind "MainController" controller
         $this->app->make('Ont\Telekinesis\MainController');
 
+        // Bind "Invoker" service container
+        $this->app->bind('Invoker', function($app)
+        {
+            return new Invoker;
+        });
     }
 
     /**
@@ -84,7 +89,7 @@ class ServiceProvider extends LaravelServiceProvider {
     private function handleAssets()
     {
         $this->publishes([
-            __DIR__ . '/../assets/js' => public_path('ont/js'),
+            __DIR__ . '/../assets' => public_path('ont/telekinesis'),
         ], 'public');
     }
 

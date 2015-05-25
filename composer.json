@@ -1,6 +1,6 @@
 {
   "name": "ont/telekinesis",
-  "description": "Universal REST route with Eloquent-like API in javascript.",
+  "description": "Universal REST route with Eloquent-like API for javascript.",
   "keywords": [],
   "homepage": "",
   "license": "MIT",

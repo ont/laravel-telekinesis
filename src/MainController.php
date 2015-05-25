@@ -3,10 +3,11 @@
 use App\Http\Controllers\Controller;
 use App\User;
 
+use \Input;  // for avoiding "\" at beginning of facade's name
+
 class MainController extends Controller {
-    public function index()
+    public function index(Invoker $invoker)
     {
-        dd('hhh');
-        return 'hhhhh';
+        return $invoker->run( Input::json()->all() );
     }
 }
