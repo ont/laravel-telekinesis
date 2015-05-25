@@ -1,78 +1,49 @@
-# Boilerplate Laravel 5 Package
+# Telekinesis
+
+Universal REST controller with Eloquent-like calls in javascript for retrieving data from server.
 
 ## Installation
 
-Clone this repo with minimal history:
+ * install package with ```composer require ont/laravel-telekinesis```
+ * add service provider to ```config/app.php```
+    ```php
+    <?php
+        'providers' => array(
+            ...
+            'Ont\Telekinesis\ServiceProvider',
+            ...
+        ),
+    ?>
+    ```
+ * publish package assets via ```php artisan vendor:publish```
 
-```sh
-git clone --depth 1 git@github.com:cviebrock/laravel5-package-template.git
-```
-
-Rename the directory and re-init it as your own package:
-
-```sh
-mv laravel5-package-template my-package
-cd my-package
-rm -rf .git
-git init
-```
-
-
-## Configuration
-
-The boilerplate files provide a scaffold for building your own package.  You'll need to make a bunch of changes to the files we've provided to make it your own.
-
-
-### composer.json
-
-Edit `composer.json` to reflect your package information.  At a minimum, you will need to change the package name and autoload lines so that "vendor/package" reflects your new package's name and namespace.
-
-```json
-{
-    "name": "vendor/package",
+## Usage
+Because of CSRF protection enabled by default in laravel5 we need special ```meta``` tag in layout wich will use telekinesis:
+```html
+<head>
     ...
-    "autoload": {
-        "psr-4": {
-            "Vendor\\Package\\": "src/"
-        }
-    },
+    <meta name="csrf_token" content="{!! csrf_token() !!}"/>
     ...
-},
+</head>
+```
+Include jquery and telekinesis.js at the bottom of the page:
+```html
+    ...
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="{{asset('ont/telekinesis/telekinesis.js')}}" type="text/javascript" charset="utf-8"></script>
+</body>
 ```
 
-
-### config/packagename.php
-
-Rename `config/packagename.php` to something more useful, like `config/my-package.php`.  This is the configuration file that Laravel will publish into it's `config` directory.  Laravel 5 doesn't use the `config/packages/vendor/...` structure that Laravel 4 did, so pick a file name that's not likely to conflict with existing configuration files.
-
-
-### src/ServiceProvider.php
-
-Open up `src/ServiceProvider.php` as well.  At a minimum you'll need to change the namespace at the top of the file (it needs to match the PSR-4 namespace you set in `composer.json`).
-
-In the `boot()` method, comment out or uncomment the components your package will need.  For example, if your package only has a configuration, then you can comment out everything except the `handleConfigs()` call:
-
-```php
-public function boot() {
-    $this->handleConfigs();
-    // $this->handleMigrations();
-    // $this->handleViews();
-    // $this->handleTranslations();
-    // $this->handleRoutes();
-}
+Finally you can request data in js via usual eloquent calls:
+```js
+T('\\App\\Resume').whereHas('vacancies', function(q){
+    q.where('views', '>', 100); 
+}).get(function(resumes){
+    console.log(resumes);
+});
 ```
-
-In the `handleConfigs()` method, you'll want to change the "packagename" references to the name you chose up above (in the [config/packagename.php] instructions).
-
-For the other methods, again change instances of "vendor" and "packagename" to your package's name.
+Here we request server to return such resumes which have related vacancies with "views" field greater than 100.
+Function ```get()``` do async call to server and accept callback as paramenter.
 
 
-### Last Steps
-
-Update the `LICENSE` file as required (make sure it matches what you said your package's license is in `composer.json`).
-
-Finally, edit this `README.md` file and replace it with a description of your own, awesome Laravel 5 package.
-
-Commit everything to your (newly initialized) git repo, and push it wherever you'll keep your package (Github, etc.).
-
-Enjoy coding!
+Enjoy eloquent in javascript!
