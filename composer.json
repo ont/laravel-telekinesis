@@ -1,0 +1,27 @@
+{
+  "name": "ont/telekinesis",
+  "description": "Universal REST route with Eloquent-like API in javascript.",
+  "keywords": [],
+  "homepage": "",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "ont.rif",
+      "email": "ont.rif@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "illuminate/config": "~5.0",
+    "illuminate/support": "~5.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Ont\\Telekinesis": "src/"
+    }
+  },
+  "minimum-stability": "dev"
+}
