@@ -6,7 +6,7 @@ Universal REST controller with Eloquent-like calls in javascript for retrieving 
 
  * install package with ```composer require ont/laravel-telekinesis```
  * add service provider to ```config/app.php```
-    ```php
+```php
     <?php
         'providers' => array(
             ...
@@ -14,7 +14,7 @@ Universal REST controller with Eloquent-like calls in javascript for retrieving 
             ...
         ),
     ?>
-    ```
+```
  * publish package assets via ```php artisan vendor:publish```
 
 ## Usage
@@ -45,5 +45,14 @@ T('\\App\\Resume').whereHas('vacancies', function(q){
 Here we request server to return such resumes which have related vacancies with "views" field greater than 100.
 Function ```get()``` do async call to server and accept callback as paramenter.
 
+## TODO
+* security checks
+   * available models (classes)
+   * available method calls
+   * available arguments
+   * possible data fields returned back from server
+   * ACL-based permissions
+* more eloquent methods in telekinesis.js
+* tests
 
-Enjoy eloquent in javascript!
+*Enjoy eloquent in javascript!*
