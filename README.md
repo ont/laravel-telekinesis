@@ -47,11 +47,11 @@ Function ```get()``` do async call to server and accept callback as paramenter.
 
 ## TODO
 * security checks
-   * available models (classes)
-   * available method calls
-   * available arguments
-   * possible data fields returned back from server
-   * ACL-based permissions
+    * available models (classes)
+    * available method calls
+    * available arguments
+    * possible data fields returned back from server
+    * ACL-based permissions
 * more eloquent methods in telekinesis.js
 * tests
 
