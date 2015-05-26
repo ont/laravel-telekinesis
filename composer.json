@@ -1,8 +1,8 @@
 {
-  "name": "ont/telekinesis",
+  "name": "ont/laravel-telekinesis",
   "description": "Universal REST route with Eloquent-like API for javascript.",
-  "keywords": [],
-  "homepage": "",
+  "keywords": ["rest", "eloquent", "admin", "orm", "javascript"],
+  "homepage": "https://bitbucket.org/ont/laravel-telekinesis",
   "license": "MIT",
   "authors": [
     {
