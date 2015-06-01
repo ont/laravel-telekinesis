@@ -86,7 +86,11 @@
     /*
      * List of mirrored Eloquent's methods
      */
+    Tele.prototype.select   = make_call('select');
+    Tele.prototype.join     = make_call('join');
     Tele.prototype.where    = make_call('where');
+    Tele.prototype.whereIn  = make_call('whereIn');
+    Tele.prototype.orderBy  = make_call('orderBy');
     Tele.prototype.whereHas = make_call('whereHas');
     Tele.prototype.get      = make_send_call('get');
 
@@ -99,10 +103,10 @@
     }
 })();
 
-
-/* -------------------------- */
-T('\\App\\Resume').whereHas('vacancies', function(q){
-    q.where('test', '>', 0);
-}).get(function(data){
-    console.log("data>>>", data);
-});
+//
+///* -------------------------- */
+//T('\\App\\Resume').whereHas('vacancies', function(q){
+//    q.where('test', '>', 0);
+//}).get(function(data){
+//    console.log("data>>>", data);
+//});
