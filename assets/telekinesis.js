@@ -91,6 +91,7 @@
     Tele.prototype.where    = make_call('where');
     Tele.prototype.whereIn  = make_call('whereIn');
     Tele.prototype.orderBy  = make_call('orderBy');
+    Tele.prototype.groupBy  = make_call('groupBy');
     Tele.prototype.whereHas = make_call('whereHas');
     Tele.prototype.get      = make_send_call('get');
 
