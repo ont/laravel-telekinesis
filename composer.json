@@ -1,5 +1,6 @@
 {
   "name": "ont/laravel-telekinesis",
+  "version": "0.0.1-alpha",
   "description": "Universal REST route with Eloquent-like API for javascript.",
   "keywords": ["rest", "eloquent", "admin", "orm", "javascript"],
   "homepage": "https://bitbucket.org/ont/laravel-telekinesis",
