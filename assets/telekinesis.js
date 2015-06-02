@@ -67,7 +67,10 @@
             // SEE: http://stackoverflow.com/a/4775938
             var args = Array.prototype.slice.call(arguments);
 
-            var callback = args.pop();  // last argument is always callback
+            var callback = null;
+            if(typeof args[args.length - 1] == 'function')
+                callback = args.pop();  // last argument is callback
+
             func.apply(this, args);     // call func in context of Tele object
 
             // TODO: get name of route from package config
@@ -93,6 +96,8 @@
     Tele.prototype.orderBy  = make_call('orderBy');
     Tele.prototype.groupBy  = make_call('groupBy');
     Tele.prototype.whereHas = make_call('whereHas');
+
+    Tele.prototype.update   = make_send_call('update');
     Tele.prototype.get      = make_send_call('get');
 
 

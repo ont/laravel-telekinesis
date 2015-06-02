@@ -8,10 +8,10 @@ class Invoker {
     public function run($json)
     {
         //$this->tree = json_decode($json);   // parse..
-        $this->tree = json_decode(json_encode($json));
+        $this->tree = $json;
         $this->makeRoot();   // get root object instance
 
-        return $this->apply( $this->tree->calls, $this->root );
+        return $this->apply( $this->tree['calls'], $this->root );
     }
 
 
@@ -21,7 +21,7 @@ class Invoker {
      */
     private function makeRoot()
     {
-        $class = $this->tree->class;
+        $class = $this->tree['class'];
         $this->root = new $class;
     }
 
@@ -34,8 +34,8 @@ class Invoker {
         $cur = $obj;
         foreach($calls as $call)
         {
-            $name = $call->name;
-            $args = $this->prepareArgs($call->args);
+            $name = $call['name'];
+            $args = $this->prepareArgs($call['args']);
 
             $cur = call_user_func_array([$cur, $name], $args);   /// ... call one step in chain
         }
@@ -47,13 +47,13 @@ class Invoker {
         $arr = [];
         foreach($args as $a)
         {
-            if(isset($a->v))
-                $arr[] = $a->v;
+            if(isset($a['v']))
+                $arr[] = $a['v'];
 
-            // TODO: extend to class, now is only closures
-            if(isset($a->class)) {
+            // TODO: add support for classes (at this moment only closures are processed)
+            if(isset($a['class'])) {
                 $c = function($q) use ($a) {
-                    $this->apply($a->calls, $q);
+                    $this->apply($a['calls'], $q);
                 };
 
                 $arr[] = $c;
