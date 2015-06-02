@@ -97,6 +97,7 @@
     Tele.prototype.groupBy  = make_call('groupBy');
     Tele.prototype.whereHas = make_call('whereHas');
 
+    Tele.prototype.delete   = make_send_call('delete');
     Tele.prototype.update   = make_send_call('update');
     Tele.prototype.get      = make_send_call('get');
 
