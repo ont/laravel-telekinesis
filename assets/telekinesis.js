@@ -24,6 +24,15 @@
 
 
     /*
+     * Return copy of current object
+     */
+    Tele.prototype.clone = function(){
+        var clone = new Tele(this.tree.class);
+        clone.tree.calls = this.tree.calls.slice();
+        return clone;
+    }
+
+    /*
      * Prepare args: different serialization for values and closures
      */
     Tele.prototype.make_args = function(args){
@@ -90,6 +99,8 @@
      * List of mirrored Eloquent's methods
      */
     Tele.prototype.select   = make_call('select');
+    Tele.prototype.limit    = make_call('limit');
+    Tele.prototype.offset   = make_call('offset');
     Tele.prototype.join     = make_call('join');
     Tele.prototype.where    = make_call('where');
     Tele.prototype.whereIn  = make_call('whereIn');
@@ -97,6 +108,7 @@
     Tele.prototype.groupBy  = make_call('groupBy');
     Tele.prototype.whereHas = make_call('whereHas');
 
+    Tele.prototype.count    = make_send_call('count');
     Tele.prototype.delete   = make_send_call('delete');
     Tele.prototype.update   = make_send_call('update');
     Tele.prototype.get      = make_send_call('get');
