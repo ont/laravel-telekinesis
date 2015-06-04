@@ -18,14 +18,6 @@ Universal REST controller with Eloquent-like calls in javascript for retrieving 
  * publish package assets via ```php artisan vendor:publish```
 
 ## Usage
-Because of CSRF protection enabled by default in laravel5 we need special ```meta``` tag in layout wich will use telekinesis:
-```html
-<head>
-    ...
-    <meta name="csrf_token" content="{!! csrf_token() !!}"/>
-    ...
-</head>
-```
 Include jquery and telekinesis.js at the bottom of the page:
 ```html
     ...
@@ -37,7 +29,7 @@ Include jquery and telekinesis.js at the bottom of the page:
 Finally you can request data in js via usual eloquent calls:
 ```js
 T('\\App\\Resume').whereHas('vacancies', function(q){
-    q.where('views', '>', 100); 
+    q.where('views', '>', 100);
 }).get(function(resumes){
     console.log(resumes);
 });
@@ -45,6 +37,10 @@ T('\\App\\Resume').whereHas('vacancies', function(q){
 Here we request server to return such resumes which have related vacancies with "views" field greater than 100.
 Function ```get()``` do async call to server and accept callback as paramenter.
 
+## Notes
+In laravel 5 CSRF protection enabled by default.
+This component use special ```XSRF-TOKEN``` cookie sended by laravel5 and resends it back in ```X-XSRF-TOKEN``` header.
+```
 ## TODO
 * security checks
     * available models (classes)

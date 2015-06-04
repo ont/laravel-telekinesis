@@ -6,9 +6,25 @@
     var csrf_token = $('meta[name=csrf_token]').attr('content');
     $.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': csrf_token,
+            'X-XSRF-TOKEN': readCookie('XSRF-TOKEN'),
         }
     });
+
+
+    /*
+     * SEE: http://stackoverflow.com/a/1599291
+     * Also decodeURIComponent was added here.
+     */
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
+        }
+        return null;
+    }
 
 
     /*
